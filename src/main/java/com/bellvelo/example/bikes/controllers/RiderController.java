@@ -2,7 +2,7 @@ package com.bellvelo.example.bikes.controllers;
 
 
 import com.bellvelo.example.bikes.models.Rider;
-import com.bellvelo.example.bikes.repositories.RiderRepository;
+import com.bellvelo.example.bikes.repositories.Rider.RiderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,4 +28,10 @@ public class RiderController {
     public Optional<Rider> getRider(@PathVariable Long id){
         return riderRepository.findById(id);
     }
+
+    @GetMapping("over/{age}")
+    public List<Rider> getRider(@PathVariable int age){
+        return riderRepository.getRidersOverAge(age);
+    }
+
 }

@@ -3,7 +3,7 @@ package com.bellvelo.example.bikes.controllers;
 
 
 import com.bellvelo.example.bikes.models.Team;
-import com.bellvelo.example.bikes.repositories.TeamRepository;
+import com.bellvelo.example.bikes.repositories.Team.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,5 +28,10 @@ public class TeamController {
     @GetMapping("{id}")
     public Optional<Team> getTeam(@PathVariable Long id){
         return teamRepository.findById(id);
+    }
+
+    @GetMapping("from/{nationality}")
+    public List<Team> getTeam(@PathVariable String nationality){
+        return teamRepository.getTeamsByNation(nationality);
     }
 }

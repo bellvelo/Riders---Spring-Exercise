@@ -28,7 +28,6 @@ public class Race {
     @Column(name = "prize_money")
     private double prize_money;
 
-
     @JsonIgnore
     @ManyToMany
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)

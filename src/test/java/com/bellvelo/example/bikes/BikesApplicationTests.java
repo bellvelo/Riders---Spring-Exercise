@@ -1,9 +1,7 @@
 package com.bellvelo.example.bikes;
 
-import com.bellvelo.example.bikes.models.Rider;
-import com.bellvelo.example.bikes.models.Team;
-import com.bellvelo.example.bikes.repositories.RiderRepository;
-import com.bellvelo.example.bikes.repositories.TeamRepository;
+import com.bellvelo.example.bikes.repositories.Rider.RiderRepository;
+import com.bellvelo.example.bikes.repositories.Team.TeamRepository;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

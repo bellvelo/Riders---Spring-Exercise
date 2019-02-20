@@ -1,11 +1,14 @@
 package com.bellvelo.example.bikes.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.Id;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @Entity
@@ -30,11 +33,23 @@ public class Rider {
     @JoinColumn(name ="team_id", nullable = false)
     private Team team;
 
+    @JsonIgnore
+    @ManyToMany
+    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+    @JoinTable(
+            name = "riders_races",
+            joinColumns = {@JoinColumn(name = "race_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "rider_id", nullable = false, updatable = false)}
+    )
+    private List<Rider> riders;
+
+
     public Rider(String name, String nationality, int age, Team team) {
         this.name = name;
         this.nationality = nationality;
         this.age = age;
         this.team = team;
+        this.riders = new ArrayList<Rider>();
     }
 
     public Rider() {
@@ -78,5 +93,13 @@ public class Rider {
 
     public void setTeam(Team team) {
         this.team = team;
+    }
+
+    public List<Rider> getRiders() {
+        return riders;
+    }
+
+    public void setRiders(List<Rider> riders) {
+        this.riders = riders;
     }
 }
