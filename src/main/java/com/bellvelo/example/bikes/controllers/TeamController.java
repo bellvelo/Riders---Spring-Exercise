@@ -1,8 +1,9 @@
 package com.bellvelo.example.bikes.controllers;
 
 
-import com.bellvelo.example.bikes.models.Rider;
-import com.bellvelo.example.bikes.repositories.RiderRepository;
+
+import com.bellvelo.example.bikes.models.Team;
+import com.bellvelo.example.bikes.repositories.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,19 +14,19 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(value = "/riders")  // sets the base URL
-public class RiderController {
+@RequestMapping(value = "/teams")  // sets the base URL
+public class TeamController {
 
     @Autowired
-    RiderRepository riderRepository;
+    TeamRepository teamRepository;
 
     @GetMapping
-    public List<Rider> getAllRiders(){
-        return riderRepository.findAll();
+    public List<Team> getAllTeams(){
+        return teamRepository.findAll();
     }
 
     @GetMapping("{id}")
-    public Optional<Rider> getRider(@PathVariable Long id){
-        return riderRepository.findById(id);
+    public Optional<Team> getTeam(@PathVariable Long id){
+        return teamRepository.findById(id);
     }
 }
