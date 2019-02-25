@@ -14,15 +14,16 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/riders")  // sets the base URL
+//@RequestMapping(value = "/api")
 public class RiderController {
 
     @Autowired
     RiderRepository riderRepository;
 
-    @GetMapping
-    public List<Rider> getAllRiders(){
-        return riderRepository.findAll();
-    }
+//    @GetMapping
+//    public List<Rider> getAllRiders(){
+//        return riderRepository.findAll();
+//    }
 
     @GetMapping("{id}")
     public Optional<Rider> getRider(@PathVariable Long id){
@@ -33,5 +34,7 @@ public class RiderController {
     public List<Rider> getRider(@PathVariable int age){
         return riderRepository.getRidersOverAge(age);
     }
+
+
 
 }

@@ -12,6 +12,11 @@ import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Component
 public class DataLoader implements ApplicationRunner {
 
@@ -28,6 +33,15 @@ public class DataLoader implements ApplicationRunner {
     }
 
     public void run(ApplicationArguments args) {
+
+        DateFormat sfd = new SimpleDateFormat("dd-MM-yy");
+        String newDate = "24-07-2018";
+        Date date = null;
+        try {
+            date = sfd.parse(newDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         Team lotto = new Team("Lotto Soudal", "BEL", 4, 2000);
         teamRepository.save(lotto);
@@ -52,6 +66,19 @@ public class DataLoader implements ApplicationRunner {
         Race vuelta = new Race("Vuelta Espana", "SPA", "WorldTour", 3000);
         raceRepository.save(vuelta);
 
+        tour_de_france.addRiderToRace(greg);
+        raceRepository.save(tour_de_france);
+        giro.addRiderToRace(greg);
+        raceRepository.save(giro);
+
+        giro.addRiderToRace(adam);
+        raceRepository.save(giro);
+
+        vuelta.addRiderToRace(tibaut);
+        raceRepository.save(vuelta);
+
+        tour_de_france.addRiderToRace(marcel);
+        raceRepository.save(tour_de_france);
 
     }
 }

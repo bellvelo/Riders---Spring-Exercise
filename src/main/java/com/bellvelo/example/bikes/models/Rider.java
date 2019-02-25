@@ -28,7 +28,7 @@ public class Rider {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-//    @JsonIgnore
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name ="team_id", nullable = false)
     private Team team;
@@ -38,10 +38,10 @@ public class Rider {
     @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
     @JoinTable(
             name = "riders_races",
-            joinColumns = {@JoinColumn(name = "race_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "rider_id", nullable = false, updatable = false)}
+            joinColumns = {@JoinColumn(name = "rider_id", nullable = false, updatable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "race_id", nullable = false, updatable = false)}
     )
-    private List<Rider> riders;
+    private List<Race> races;
 
 
     public Rider(String name, String nationality, int age, Team team) {
@@ -49,7 +49,7 @@ public class Rider {
         this.nationality = nationality;
         this.age = age;
         this.team = team;
-        this.riders = new ArrayList<Rider>();
+        this.races = new ArrayList<Race>();
     }
 
     public Rider() {
@@ -95,11 +95,11 @@ public class Rider {
         this.team = team;
     }
 
-    public List<Rider> getRiders() {
-        return riders;
+    public List<Race> getRaces() {
+        return races;
     }
 
-    public void setRiders(List<Rider> riders) {
-        this.riders = riders;
+    public void setRaces(List<Race> races) {
+        this.races = races;
     }
 }

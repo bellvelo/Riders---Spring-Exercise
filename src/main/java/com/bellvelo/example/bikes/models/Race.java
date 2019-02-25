@@ -97,4 +97,8 @@ public class Race {
     public void setRiders(List<Rider> riders) {
         this.riders = riders;
     }
+
+    public void addRiderToRace(Rider rider){
+        this.riders.add(rider);
+    }
 }

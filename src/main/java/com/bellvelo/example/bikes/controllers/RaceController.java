@@ -14,20 +14,25 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(value = "/races")
+//@RequestMapping( "/api")
 public class RaceController {
 
     @Autowired
     RaceRepository raceRepository;
 
-    @GetMapping
-    public List<Race> getAllRaces(){
-        return raceRepository.findAll();
-    }
+//    @GetMapping
+//    public List<Race> getAllRaces(){
+//        return raceRepository.findAll();
+//    }
+//
+//    @GetMapping("{id}")
+//    public Optional<Race> getRace(@PathVariable Long id){
+//        return raceRepository.findById(id);
+//    }
 
-    @GetMapping("{id}")
-    public Optional<Race> getRace(@PathVariable Long id){
-        return raceRepository.findById(id);
+    @GetMapping("of/{country}")
+    public List<Race> getRace(@PathVariable String country){
+        return raceRepository.getRacesFromCountry(country);
     }
-
 
 }

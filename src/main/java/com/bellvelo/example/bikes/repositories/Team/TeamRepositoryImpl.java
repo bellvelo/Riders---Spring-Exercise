@@ -1,6 +1,7 @@
 package com.bellvelo.example.bikes.repositories.Team;
 
 
+import com.bellvelo.example.bikes.models.Rider;
 import com.bellvelo.example.bikes.models.Team;
 import org.hibernate.Criteria;
 import org.hibernate.HibernateException;
@@ -19,16 +20,16 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom {
 
     @Override
     @Transactional
-    public List<Team> getTeamsByNation(String nationality){
+    public List<Team> getTeamsByNation(String nationality) {
 
         Session session = entityManager.unwrap(Session.class);
-        List<Team> results  = null;
+        List<Team> results = null;
 
-        try{
+        try {
             Criteria cr = session.createCriteria(Team.class);
             cr.add(Restrictions.eq("nationality", nationality));
             results = cr.list();
-        } catch(HibernateException ex){
+        } catch (HibernateException ex) {
             ex.printStackTrace();
         } finally {
             session.close();
@@ -36,4 +37,23 @@ public class TeamRepositoryImpl implements TeamRepositoryCustom {
         return results;
 
     }
+
+    @Override
+    @Transactional
+    public List<Rider> findAllRiderOnTeam(Team team) {
+        Session session = entityManager.unwrap(Session.class);
+        List<Rider> results = null;
+
+        try {
+            Criteria cr = session.createCriteria(Rider.class);
+            cr.add(Restrictions.eq("team", team ));
+            results = cr.list();
+        } catch (HibernateException ex) {
+            ex.printStackTrace();
+        } finally {
+            session.close();
+        }
+        return results;
+    }
+
 }
